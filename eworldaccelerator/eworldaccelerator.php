@@ -38,7 +38,7 @@ class Eworldaccelerator extends Module {
 	public function __construct() {
 		$this->name = 'eworldaccelerator';
 		$this->tab = 'administration';
-		$this->version = '0.1.0';
+		$this->version = '0.2.0';
 		$this->author = 'eworld Accelerator';
 		$this->need_instance = 0;
 		$this->eworldAcceleratorHandler = null;
@@ -53,7 +53,7 @@ class Eworldaccelerator extends Module {
 		$this->displayName = $this->l('eworld Accelerator');
 		$this->description = $this->l('Delete automatically the eworld Accelerator\'s cache when a modification is made on the back office.');
 
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => _PS_VERSION_);
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Eworldaccelerator extends Module {
 						'type' => 'text',
 						'label' => $this->l('eworld Accelerator Directory'),
 						'name' => 'EWORLDACCELERATOR_DIRECTORY',
-						'desc' => 'for example : ' . _PS_ROOT_DIR_ . '/eworld-accelerator/',
+						'desc' => 'absolute path to eworldAccelerator\'s files',
 						'size' => 100,
 						'required' => true
 					)
@@ -178,9 +178,16 @@ class Eworldaccelerator extends Module {
 	 * Set values for the inputs.
 	 */
 	protected function getConfigFormValues() {
-		return array(
-			'EWORLDACCELERATOR_DIRECTORY' => Configuration::get('EWORLDACCELERATOR_DIRECTORY', ''),
-		);
+		if (trim(Tools::getValue('EWORLDACCELERATOR_DIRECTORY')) != '') {
+			return array(
+				'EWORLDACCELERATOR_DIRECTORY' => Configuration::get('EWORLDACCELERATOR_DIRECTORY'),
+			);
+		}
+		else {
+			return array(
+				'EWORLDACCELERATOR_DIRECTORY' => _PS_ROOT_DIR_ . '/eworld-accelerator/',
+			);
+		}
 	}
 
 	/**

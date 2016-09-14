@@ -2,7 +2,7 @@
 <module>
 	<name>eworldaccelerator</name>
 	<displayName><![CDATA[eworld Accelerator]]></displayName>
-	<version><![CDATA[0.1.0]]></version>
+	<version><![CDATA[0.2.0]]></version>
 	<description><![CDATA[Delete automatically the eworld Accelerator\'s cache when a modification is made on the back office.]]></description>
 	<author><![CDATA[eworld Accelerator]]></author>
 	<tab><![CDATA[administration]]></tab>
