@@ -53,7 +53,7 @@ class Eworldaccelerator extends Module {
 		$this->displayName = $this->l('eworld Accelerator');
 		$this->description = $this->l('Delete automatically the eworld Accelerator\'s cache when a modification is made on the back office.');
 
-		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => _PS_VERSION_);
+		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.9');
 	}
 
 	/**
