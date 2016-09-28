@@ -6,7 +6,7 @@
  * Time: 17:10
  */
 
-class eworldAcceleratorHandler {
+class eworldAcceleratorPrestashopHandler {
 
 	/** @var string $directory */
 	private $directory;

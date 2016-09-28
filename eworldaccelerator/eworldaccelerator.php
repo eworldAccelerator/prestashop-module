@@ -28,12 +28,12 @@ if (!defined('_PS_VERSION_')) {
 	exit;
 }
 ini_set('display_errors', 1);
-require_once 'eworldAcceleratorHandler.php';
+require_once 'eworldAcceleratorPrestashopHandler.php';
 
 class Eworldaccelerator extends Module {
 	protected $config_form = false;
-	/** @var EworldAcceleratorHandler $eworldAcceleratorHandler */
-	private $eworldAcceleratorHandler;
+	/** @var eworldAcceleratorPrestashopHandler $eworldAcceleratorPrestashopHandler */
+	private $eworldAcceleratorPrestashopHandler;
 
 	public function __construct() {
 		$this->name = 'eworldaccelerator';
@@ -41,7 +41,7 @@ class Eworldaccelerator extends Module {
 		$this->version = '0.2.0';
 		$this->author = 'eworld Accelerator';
 		$this->need_instance = 0;
-		$this->eworldAcceleratorHandler = null;
+		$this->eworldAcceleratorPrestashopHandler = null;
 
 		/**
 		 * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
@@ -298,8 +298,8 @@ class Eworldaccelerator extends Module {
 		/** @var CMSCore $objectCMS */
 		$objectCMS = $params['object'];
 		$permalink = $this->context->link->getCMSLink($objectCMS);
-		if ($this->getEworldAcceleratorHandler()) {
-			$this->eworldAcceleratorHandler->deleteURL($permalink);
+		if ($this->getEworldAcceleratorPrestashopHandler()) {
+			$this->eworldAcceleratorPrestashopHandler->deleteURL($permalink);
 			$this->context->cookie->cacheDeleted = 1;
 		}
 	}
@@ -324,8 +324,8 @@ class Eworldaccelerator extends Module {
 	 */
 	private function deleteCacheFromProductId($productId) {
 		$permalink = $this->context->link->getProductLink($productId);
-		if ($this->getEworldAcceleratorHandler()) {
-			$this->eworldAcceleratorHandler->deleteURL($permalink);
+		if ($this->getEworldAcceleratorPrestashopHandler()) {
+			$this->eworldAcceleratorPrestashopHandler->deleteURL($permalink);
 			$this->context->cookie->cacheDeleted = 1;
 		}
 	}
@@ -335,8 +335,8 @@ class Eworldaccelerator extends Module {
 	 */
 	private function deleteCacheFromCategoryId($categoryId) {
 		$permalink = $this->context->link->getCategoryLink($categoryId);
-		if ($this->getEworldAcceleratorHandler()) {
-			$this->eworldAcceleratorHandler->deleteURL($permalink);
+		if ($this->getEworldAcceleratorPrestashopHandler()) {
+			$this->eworldAcceleratorPrestashopHandler->deleteURL($permalink);
 			$this->context->cookie->cacheDeleted = 1;
 		}
 		// Parent Category
@@ -349,13 +349,13 @@ class Eworldaccelerator extends Module {
 	/**
 	 * @return bool
 	 */
-	private function getEworldAcceleratorHandler() {
-		if (is_object($this->eworldAcceleratorHandler)) {
+	private function getEworldAcceleratorPrestashopHandler() {
+		if (is_object($this->eworldAcceleratorPrestashopHandler)) {
 			return true;
 		}
 		else {
-			$this->eworldAcceleratorHandler = new EworldAcceleratorHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
-			if (is_object($this->eworldAcceleratorHandler)) {
+			$this->eworldAcceleratorPrestashopHandler = new EworldAcceleratorPrestashopHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
+			if (is_object($this->eworldAcceleratorPrestashopHandler)) {
 				return true;
 			}
 		}

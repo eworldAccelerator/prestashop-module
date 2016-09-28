@@ -48,9 +48,9 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				{if $eworldAcceleratorHandler->isThereSystemUpdate()}<p>A <strong>new version</strong> of eworld Accelerator system is available. <a class="btn btn-default" href="{$eworldAcceleratorHandler->getSystemUpdateLink()}" target="_blank">Download new version</a></p><br />{/if}
-				<a class="btn btn-default" target="_blank" href="{$eworldAcceleratorHandler->getDashboardURL()}">Dashboard</a>&nbsp;&nbsp;
-				<a class="btn btn-default" target="_blank" href="{$eworldAcceleratorHandler->getConfigurationURL()}">Configuration</a>
+				{if $eworldAcceleratorPrestashopHandler->isThereSystemUpdate()}<p>A <strong>new version</strong> of eworld Accelerator system is available. <a class="btn btn-default" href="{$eworldAcceleratorPrestashopHandler->getSystemUpdateLink()}" target="_blank">Download new version</a></p><br />{/if}
+				<a class="btn btn-default" target="_blank" href="{$eworldAcceleratorPrestashopHandler->getDashboardURL()}">Dashboard</a>&nbsp;&nbsp;
+				<a class="btn btn-default" target="_blank" href="{$eworldAcceleratorPrestashopHandler->getConfigurationURL()}">Configuration</a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,7 @@
 					<input type="submit" value="Garbage Collector" class="btn btn-default btn-lg" name="gc">
 				</form>
 
-				{if $eworldAcceleratorHandler->isCdnActive()}<form novalidate="novalidate" action="" method="post" style="float:left;margin:5px 16px 5px 0;">
+				{if $eworldAcceleratorPrestashopHandler->isCdnActive()}<form novalidate="novalidate" action="" method="post" style="float:left;margin:5px 16px 5px 0;">
 					<input type="hidden" value="1" name="submitAction">
 					<input type="hidden" value="cdnPurge" name="action">
 					<input type="submit" value="Purge CDN files" class="btn btn-default btn-lg" name="purgeCDN">

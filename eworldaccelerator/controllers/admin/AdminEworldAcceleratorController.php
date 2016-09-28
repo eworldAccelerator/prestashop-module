@@ -6,7 +6,7 @@
  * Time: 19:22
  */
 ini_set('display_errors', 1);
-//require_once '../../eworldAcceleratorHandler.php';
+//require_once '../../eworldAcceleratorPrestashopHandler.php';
 
 class AdminEworldAcceleratorController extends ModuleAdminController {
 	private $modulePath;
@@ -26,14 +26,14 @@ class AdminEworldAcceleratorController extends ModuleAdminController {
 		parent::initContent();
 	}
 	public function renderView() {
-		$eworldAcceleratorHandler = new EworldAcceleratorHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
-		$version = $eworldAcceleratorHandler->getVersion();
+		$eworldAcceleratorPrestashopHandler = new EworldAcceleratorPrestashopHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
+		$version = $eworldAcceleratorPrestashopHandler->getVersion();
 		$this->context->smarty->assign(array(
 			'module_dir' => $this->moduleUrl,
 			'eacc_version' => $version,
 			'errors' => sizeof($this->errorList) > 0 ? Tools::displayError(join('<br>', $this->errorList)).'<br>' : '',
 			'oks' => sizeof($this->okList) > 0 ? ModuleCore::displayConfirmation(join('<br>', $this->okList)).'<br>' : '',
-			'eworldAcceleratorHandler' => $eworldAcceleratorHandler,
+			'eworldAcceleratorPrestashopHandler' => $eworldAcceleratorPrestashopHandler,
 		));
 		$html = $output = $this->context->smarty->fetch($this->modulePath.'views/templates/admin/view.tpl');
 
@@ -46,18 +46,18 @@ class AdminEworldAcceleratorController extends ModuleAdminController {
 	public function postProcess() {
 		if (Tools::isSubmit('submitAction') == 1) {
 			$action = trim(Tools::getValue('action'));
-			$eworldAcceleratorHandler = new EworldAcceleratorHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
+			$eworldAcceleratorPrestashopHandler = new EworldAcceleratorPrestashopHandler(trim(Configuration::get('EWORLDACCELERATOR_DIRECTORY', '')));
 			switch ($action) {
 				case 'deleteAllCache' :
-					$eworldAcceleratorHandler->deleteAllCache();
+					$eworldAcceleratorPrestashopHandler->deleteAllCache();
 					$this->okList[] = $this->l('All cache files have been deleted.');
 					break;
 				case 'cdnPurge' :
-					$eworldAcceleratorHandler->purgeCDN();
+					$eworldAcceleratorPrestashopHandler->purgeCDN();
 					$this->okList[] = $this->l('Purge tasks have been sent to CDN servers. It will take several minutes.');
 					break;
 				case 'gc' :
-					$eworldAcceleratorHandler->garbageCollector();
+					$eworldAcceleratorPrestashopHandler->garbageCollector();
 					$this->okList[] = $this->l('All expired cache files have been deleted.');
 					break;
 				default :
